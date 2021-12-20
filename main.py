@@ -21,6 +21,7 @@ Bootstrap(app)
 
 # #CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
+app.config['POSTGRES_DATABASE_URL'] = os.environ.get("POSTGRES_DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -95,7 +96,7 @@ class Comment(db.Model):
     blogs = relationship("BlogPost", back_populates="comments")
 
 # #
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
